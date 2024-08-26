@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPP Salary Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="calculator">
+        <h1>PPP Salary Calculator</h1>
+        <form id="calculatorForm">
+            <div class="input-group">
+                <div class="input-wrapper">
+                    <div>
+                        <label for="sourceCountry">Source Country</label>
+                        <select id="sourceCountry" name="sourceCountry" required>
+                            {% for country in countries %}
+                            <option value="{{ country }}" {% if country == 'Indonesia' %}selected{% endif %}>{{ country }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="targetCountry">Target Country</label>
+                        <select id="targetCountry" name="targetCountry" required>
+                            {% for country in countries %}
+                            <option value="{{ country }}" {% if country == 'United States' %}selected{% endif %}>{{ country }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="sourceAmount">Salary in Source Country</label>
+                <div class="input-wrapper" style="display: flex; gap: 10px;">
+                    <input type="number" id="sourceAmount" name="sourceAmount" placeholder="Enter salary amount" style="flex: 2;">
+                    <select id="salaryFrequency" name="salaryFrequency" style="flex: 1;">
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="loading" class="loading-container" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>Calculating...</p>
+        </div>
+        <div id="result" style="display: none;">
+            <p>Equivalent Salary in</p><h3><span id="resultFlag"></span> <span id="resultCountry"></span>:</h3>
+            <h2><span id="resultValueYearly"></span> /Year </h2>
+            <p>or</p>
+            <h3><span id="resultValueMonthly"></span> /Month</h3>
+        </div>
+        <div id="otherData" style="display: none;">
+            <h2>Your Destination Data</h2>
+            <table>
+                <tr>
+                    <td>Capital City</td>
+                    <td id="targetCapital"></td>
+                </tr>
+                <tr>
+                    <td>Income Level</td>
+                    <td id="incomeLevel"></td>
+                </tr>
+                <tr>
+                    <td>Distance</td>
+                    <td id="distance"></td>
+                </tr>
+                <tr>
+                    <td>GDP per Capita (USD)</td>
+                    <td id="gdpPerCapita"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
