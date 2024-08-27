@@ -109,3 +109,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Modal functionality
+const modals = {
+    credits: document.getElementById("creditsPopup"),
+    definitions: document.getElementById("definitionsPopup")
+};
+
+const buttons = {
+    credits: document.getElementById("creditsButton"),
+    definitions: document.getElementById("definitionsButton")
+};
+
+// Open modal
+function openModal(modalType) {
+    modals[modalType].style.display = "block";
+}
+
+// Close modal
+function closeModal(modalType) {
+    modals[modalType].style.display = "none";
+}
+
+// Event listeners for opening modals
+buttons.credits.onclick = () => openModal('credits');
+buttons.definitions.onclick = () => openModal('definitions');
+
+// Event listeners for closing modals
+document.querySelectorAll('.close').forEach(closeBtn => {
+    closeBtn.onclick = function() {
+        closeModal(this.closest('.popup').id.replace('Popup', ''));
+    }
+});
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    if (event.target.classList.contains('popup')) {
+        closeModal(event.target.id.replace('Popup', ''));
+    }
+}

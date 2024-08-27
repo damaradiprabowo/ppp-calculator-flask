@@ -73,6 +73,52 @@
                 </tr>
             </table>
         </div>
+        <footer>
+            <div class="footer-buttons">
+                <a href="#" id="creditsButton">Credits</a>
+                <a href="#" id="definitionsButton">Definitions</a>
+                <a href="https://github.com/damaradiprabowo/ppp-calculator-flask" target="_blank" rel="noopener noreferrer">Github</a>
+            </div>
+            <p>
+                Crafted with ❤️ by <a href="https://damaradiprabowo.com" target="_blank" rel="noopener noreferrer">Damar Adi Prabowo</a> | © 2024 All rights reserved.
+            </p>
+        </footer>
+        </div>
+        <div id="creditsPopup" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <p>Credits to the following resources:</p>
+                <ul>
+                    <li>World Bank API: <a href="https://www.worldbank.org/" target="_blank" rel="noopener noreferrer">https://www.worldbank.org/</a></li>
+                    <li>Rest Country API: <a href="https://restcountries.com/" target="_blank" rel="noopener noreferrer">https://restcountries.com/</a></li>
+                    <li>Built with Cursor: <a href="https://cursor.com/" target="_blank" rel="noopener noreferrer">https://cursor.com/</a></li> 
+                </ul>
+            </div>
+        </div>
+        <div id="definitionsPopup" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2>Definitions</h2>
+                <table>
+                    <tr>
+                        <th>Term</th>
+                        <th>Definition</th>
+                    </tr>
+                    <tr>
+                        <td>PPP (Purchasing Power Parity)</td>
+                        <td>A way to compare the value of money in different countries by looking at what you can actually buy with it. It helps us understand how far your money goes in each place, making it easier to compare living costs across countries.</td>
+                    </tr>
+                    <tr>
+                        <td>GDP per Capita</td>
+                        <td>A measure of a country's economic output that accounts for its number of people. It divides the country's gross domestic product by its total population.</td>
+                    </tr>
+                    <tr>
+                        <td>Income Level</td>
+                        <td>The World Bank's classification of economies into four income groups: low, lower-middle, upper-middle, and high-income countries. This classification is based on GNI per capita.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
