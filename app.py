@@ -2,11 +2,8 @@ from flask import Flask, render_template, request, jsonify
 import requests
 from datetime import datetime
 import math
-import locale
 
 app = Flask(__name__)
-
-locale.setlocale(locale.LC_ALL, 'C.UTF-8')
 
 WORLD_BANK_DATA_INDEX = 1
 COUNTRY_DATA = {}
@@ -140,8 +137,8 @@ def calculate():
     monthly_target_amount = yearly_target_amount / 12
 
     # Format amounts in US currency format
-    yearly_target_amount = locale.currency(yearly_target_amount, grouping=True)
-    monthly_target_amount = locale.currency(monthly_target_amount, grouping=True)
+    yearly_target_amount = "${:,.2f}".format(yearly_target_amount)
+    monthly_target_amount = "${:,.2f}".format(monthly_target_amount)
 
     source_info = get_country_info(source_country)
     target_info = get_country_info(target_country)
