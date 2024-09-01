@@ -6,7 +6,7 @@ import locale
 
 app = Flask(__name__)
 
-locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+locale.setlocale(locale.LC_ALL, 'en_US')
 
 WORLD_BANK_DATA_INDEX = 1
 COUNTRY_DATA = {}
