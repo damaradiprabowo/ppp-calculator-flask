@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resultElement.style.display = 'block';
             otherDataElement.style.display = 'block';
             submitButton.disabled = false;
+
             // Generate flag image URLs
             const sourceFlagUrl = `https://flagcdn.com/16x12/${data.sourceIso2Code}.png`;
             const targetFlagUrl = `https://flagcdn.com/16x12/${data.targetIso2Code}.png`;
@@ -43,6 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
                      height="16" 
                      alt="${data.targetCountry}">
             `;
+
+            // Result data
             document.getElementById('resultCountry').textContent = `${data.targetCountry}`;
             document.getElementById('resultValueYearly').textContent = `${data.targetAmountYearly}`;
             document.getElementById('resultValueMonthly').textContent = `${data.targetAmountMonthly}`;
@@ -105,9 +108,29 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
             loadingElement.style.display = 'none';
             submitButton.disabled = false;
-            // Optionally, show an error message to the user
         });
     });
+});
+
+document.getElementById('sourceAmount').addEventListener('input', function(e) {
+    // Remove non-digit characters
+    let value = this.value.replace(/[^\d.]/g, '');
+    
+    // Ensure only one decimal point
+    let parts = value.split('.');
+    if (parts.length > 2) {
+        parts = [parts[0], parts.slice(1).join('')];
+    }
+    if (parts[1]) {
+        parts[1] = parts[1].slice(0, 2);
+    }
+    value = parts.join('.');
+
+    // Format with commas
+    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Update input value
+    this.value = value;
 });
 
 // Modal functionality

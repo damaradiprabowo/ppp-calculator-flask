@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, jsonify
 import requests
 from datetime import datetime
 import math
+import locale
 
 app = Flask(__name__)
+
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 WORLD_BANK_DATA_INDEX = 1
 COUNTRY_DATA = {}
@@ -124,7 +127,7 @@ def index():
 def calculate():
     source_country = request.form['sourceCountry']
     target_country = request.form['targetCountry']
-    source_amount = float(request.form['sourceAmount'])
+    source_amount = float(request.form['sourceAmount'].replace(',', ''))
     salary_frequency = request.form['salaryFrequency']
 
     # Convert source amount to yearly if it's monthly
@@ -135,6 +138,10 @@ def calculate():
 
     yearly_target_amount = yearly_source_amount / source_ppp * target_ppp
     monthly_target_amount = yearly_target_amount / 12
+
+    # Format amounts in US currency format
+    yearly_target_amount = locale.currency(yearly_target_amount, grouping=True)
+    monthly_target_amount = locale.currency(monthly_target_amount, grouping=True)
 
     source_info = get_country_info(source_country)
     target_info = get_country_info(target_country)
@@ -149,8 +156,8 @@ def calculate():
     return jsonify({
         'sourceAmount': f"{source_amount:.2f}",
         'sourceFrequency': salary_frequency,
-        'targetAmountMonthly': f"{target_currency_code} {monthly_target_amount:.2f}",
-        'targetAmountYearly': f"{target_currency_code} {yearly_target_amount:.2f}",
+        'targetAmountMonthly': f"{target_currency_code} {monthly_target_amount}",
+        'targetAmountYearly': f"{target_currency_code} {yearly_target_amount}",
         'sourceCountry': source_country,
         'targetCountry': target_country,
         'sourceIncomeLevel': source_info['incomeLevel'],
