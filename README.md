@@ -16,7 +16,7 @@ This project is a web application that calculates equivalent salaries between co
 ## Setup and Installation
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:damaradiprabowo/ppp-calculator-flask.git
    ``` 
 2. Install the required Python packages:
    ```bash
@@ -48,4 +48,3 @@ Credits to the following resources:
 - inspiration: https://www.chrislross.com/PPPConverter/
 - World Bank API: https://www.worldbank.org/
 - Rest Country API: https://restcountries.com/
-- Built with Cursor: https://cursor.com/
