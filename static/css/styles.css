@@ -34,6 +34,15 @@ h2, h3, p {
     margin-bottom: 5px;
 }
 
+h4 {
+    color: #888888;
+    font-size: 13px;
+    margin-top: -35px; /* Adjust to fit nicely below the h1 if needed */
+    margin-bottom: 30px; /* Adjust spacing between subtitle and form */
+    text-align: center;
+    font-weight: normal;
+}
+
 .input-group {
     margin-bottom: 15px;
 }
