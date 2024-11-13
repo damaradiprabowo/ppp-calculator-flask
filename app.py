@@ -136,9 +136,8 @@ def calculate():
     yearly_target_amount = yearly_source_amount / source_ppp * target_ppp
     monthly_target_amount = yearly_target_amount / 12
 
-    # Format amounts in US currency format
-    yearly_target_amount = "${:,.2f}".format(yearly_target_amount)
-    monthly_target_amount = "${:,.2f}".format(monthly_target_amount)
+    yearly_target_amount = "{:,.2f}".format(yearly_target_amount)
+    monthly_target_amount = "{:,.2f}".format(monthly_target_amount)
 
     source_info = get_country_info(source_country)
     target_info = get_country_info(target_country)

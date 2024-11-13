@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="calculator">
-        <h1>PPP Salary Calculator</h1>
+        <h1>Purchasing Power Converter</h1>
+        <h4>Compare your income, costs, or spending across countries!</h4>
         <form id="calculatorForm">
             <div class="input-group">
                 <div class="input-wrapper">
@@ -31,16 +32,16 @@
                 </div>
             </div>
             <div class="input-group">
-                <label for="sourceAmount">Salary in Source Country</label>
+                <label for="sourceAmount">Amount in Source Country</label>
                 <div class="input-wrapper" style="display: flex; gap: 10px;">
-                    <input type="text" id="sourceAmount" name="sourceAmount" placeholder="Enter salary amount" style="flex: 2;" inputmode="decimal">
+                    <input type="text" id="sourceAmount" name="sourceAmount" placeholder="Enter any amount: Salary, expenses, etc." style="flex: 2;" inputmode="decimal">
                     <select id="salaryFrequency" name="salaryFrequency" style="flex: 1;">
                         <option value="monthly">Monthly</option>
                         <option value="yearly">Yearly</option>
                     </select>
                 </div>
             </div>
-            <button type="submit">Calculate</button>
+            <button type="submit">Convert</button>
         </form>
         <div id="loading" class="loading-container" style="display: none;">
             <div class="loading-spinner"></div>
@@ -50,7 +51,7 @@
             <p>Equivalent Salary in</p><h3><span id="resultFlag"></span> <span id="resultCountry"></span>:</h3>
             <h2><span id="resultValueYearly"></span> /Year </h2>
             <p>or</p>
-            <h3><span id="resultValueMonthly"></span> /Month</h3>
+            <h2><span id="resultValueMonthly"></span> /Month</h2>
         </div>
         <div id="otherData" style="display: none;">
             <h2>Your Destination Data</h2>
