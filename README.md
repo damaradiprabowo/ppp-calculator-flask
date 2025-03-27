@@ -1,8 +1,8 @@
-# PPP Salary Calculator
-This project is a web application that calculates equivalent salaries between countries based on Purchasing Power Parity (PPP). It provides users with insights into how their salary might translate to different countries, considering factors like GDP per capita and income levels.
+# PPP Value Converted
+This project is a web application that calculates equivalent monetary values between countries based on Purchasing Power Parity (PPP). It helps users understand how different amounts (salaries, costs, income, spending) translate across countries, considering factors like GDP per capita and income levels.
 
 ## Features
-- Calculate equivalent salaries between countries
+- Calculate equivalent monetary values between countries
 - Display additional country information (capital city, income level, GDP per capita)
 - Responsive design for various screen sizes
 - Loading animation during calculations

@@ -3,29 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPP Salary Calculator</title>
+    <title>Purchasing Power Parity Converter</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/256.png') }}">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Purchasing Power Parity Converter">
+    <meta name="description" content="Compare salaries, costs, and spending power across different countries using PPP conversion">
+    <meta name="keywords" content="PPP, purchasing power parity, salary calculator, cost of living, international comparison">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:title" content="Purchasing Power Parity Converter">
+    <meta property="og:description" content="Compare salaries, costs, and spending power across different countries using PPP conversion">
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.png', _external=True) }}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.url }}">
+    <meta property="twitter:title" content="Purchasing Power Parity Converter">
+    <meta property="twitter:description" content="Compare salaries, costs, and spending power across different countries using PPP conversion">
+    <meta property="twitter:image" content="{{ url_for('static', filename='images/og-image.png', _external=True) }}">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ffffff">
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="calculator">
         <h1>Purchasing Power Converter</h1>
         <h4>Compare your income, costs, or spending across countries!</h4>
-        <form id="calculatorForm">
+        <form id="calculatorForm" autocomplete="off">
             <div class="input-group">
                 <div class="input-wrapper">
                     <div>
                         <label for="sourceCountry">Source Country</label>
                         <select id="sourceCountry" name="sourceCountry" required>
                             {% for country in countries %}
-                            <option value="{{ country }}" {% if country == 'Indonesia' %}selected{% endif %}>{{ country }}</option>
+                            <option value="{{ country }}" {% if country == selected_source|default('Indonesia') %}selected{% endif %}>{{ country }}</option>
                             {% endfor %}
                         </select>
                     </div>
+                    <button type="button" id="switchCountries" class="switch-button">⇄</button>
                     <div>
                         <label for="targetCountry">Target Country</label>
                         <select id="targetCountry" name="targetCountry" required>
                             {% for country in countries %}
-                            <option value="{{ country }}" {% if country == 'United States' %}selected{% endif %}>{{ country }}</option>
+                            <option value="{{ country }}" {% if country == selected_target|default('United States') %}selected{% endif %}>{{ country }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -34,10 +63,17 @@
             <div class="input-group">
                 <label for="sourceAmount">Amount in Source Country</label>
                 <div class="input-wrapper" style="display: flex; gap: 10px;">
-                    <input type="text" id="sourceAmount" name="sourceAmount" placeholder="Enter any amount: Salary, expenses, etc." style="flex: 2;" inputmode="decimal">
+                    <input type="text" 
+                           id="sourceAmount" 
+                           name="sourceAmount" 
+                           placeholder="Enter any amount: Salary, expenses, etc." 
+                           style="flex: 2;" 
+                           inputmode="decimal"
+                           value="{{ initial_value }}"
+                           {% if initial_value %}autofocus{% endif %}>
                     <select id="salaryFrequency" name="salaryFrequency" style="flex: 1;">
-                        <option value="monthly">Monthly</option>
-                        <option value="yearly">Yearly</option>
+                        <option value="monthly" {% if initial_granularity == 'monthly' %}selected{% endif %}>Monthly</option>
+                        <option value="yearly" {% if initial_granularity == 'yearly' %}selected{% endif %}>Yearly</option>
                     </select>
                 </div>
             </div>
@@ -48,7 +84,7 @@
             <p>Calculating...</p>
         </div>
         <div id="result" style="display: none;">
-            <p>Equivalent Salary in</p><h3><span id="resultFlag"></span> <span id="resultCountry"></span>:</h3>
+            <p>Equivalent Value in</p><h3><span id="resultFlag"></span> <span id="resultCountry"></span>:</h3>
             <h2><span id="resultValueYearly"></span> /Year </h2>
             <p>or</p>
             <h2><span id="resultValueMonthly"></span> /Month</h2>
