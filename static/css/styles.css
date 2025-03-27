@@ -49,8 +49,13 @@ h4 {
 
 .input-wrapper {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.input-wrapper > div {
+    flex: 1;
 }
 
 label {
@@ -61,12 +66,23 @@ label {
 
 select, input {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ffffff;
+    padding: 10px 12px;
+    border: 1px solid #404040;
     border-radius: 4px;
-    background-color: #000000;
+    background-color: #2a2a2a;
     color: #ffffff;
     box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+select:hover, input:hover {
+    border-color: #606060;
+}
+
+select:focus, input:focus {
+    border-color: #808080;
+    outline: none;
+    background-color: #333333;
 }
 
 button {
@@ -182,6 +198,23 @@ td {
     }
 }
 
+@media (max-width: 768px) {
+    .input-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .switch-button {
+        margin-top: 0;
+        transform: rotate(90deg);
+    }
+
+    .switch-button:hover {
+        transform: rotate(90deg);
+    }
+}
+
 footer p, footer a {
     margin-top: 2px;
     margin-bottom: 0;
@@ -251,4 +284,31 @@ footer a:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.switch-button {
+    position: relative;
+    background: #2a2a2a;
+    border: 1px solid #404040;
+    border-radius: 4px;
+    color: #808080;
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: 0;
+    margin-top: 22px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    transition: all 0.2s ease;
+}
+
+.switch-button:hover {
+    background: #404040;
+    color: #ffffff;
+    border-color: #606060;
 }

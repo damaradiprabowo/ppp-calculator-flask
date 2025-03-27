@@ -110,6 +110,15 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.disabled = false;
         });
     });
+
+    // Auto-trigger conversion if URL has parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('source') && urlParams.has('destination')) {
+        const submitButton = document.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.click();
+        }
+    }
 });
 
 document.getElementById('sourceAmount').addEventListener('input', function(e) {
@@ -171,3 +180,54 @@ window.onclick = function(event) {
         closeModal(event.target.id.replace('Popup', ''));
     }
 }
+
+// Add this function after DOMContentLoaded
+function updateURL() {
+    const sourceCountry = document.getElementById('sourceCountry').value;
+    const targetCountry = document.getElementById('targetCountry').value;
+    const amount = document.getElementById('sourceAmount').value;
+    const frequency = document.getElementById('salaryFrequency').value;
+    
+    // Create URL-friendly slugs
+    const sourceSlug = sourceCountry.toLowerCase().replace(/ /g, '-');
+    const targetSlug = targetCountry.toLowerCase().replace(/ /g, '-');
+    
+    // Build query string
+    const params = new URLSearchParams({
+        source: sourceSlug,
+        destination: targetSlug,
+        granularity: frequency
+    });
+    
+    // Only add amount if it's not empty
+    if (amount) {
+        params.append('value', amount.replace(/,/g, ''));
+    }
+    
+    // Update URL without reloading the page
+    const newPath = `/convert/?${params.toString()}`;
+    window.history.pushState({}, '', newPath);
+}
+
+// Add these event listeners after the existing ones
+document.getElementById('sourceCountry').addEventListener('change', updateURL);
+document.getElementById('targetCountry').addEventListener('change', updateURL);
+document.getElementById('sourceAmount').addEventListener('input', updateURL);
+document.getElementById('salaryFrequency').addEventListener('change', updateURL);
+
+// Update switchCountries event listener
+document.getElementById('switchCountries').addEventListener('click', function() {
+    const sourceCountry = document.getElementById('sourceCountry');
+    const targetCountry = document.getElementById('targetCountry');
+    
+    // Store the current values
+    const sourceValue = sourceCountry.value;
+    const targetValue = targetCountry.value;
+    
+    // Swap the values
+    sourceCountry.value = targetValue;
+    targetCountry.value = sourceValue;
+    
+    // Update URL after switching
+    updateURL();
+});
