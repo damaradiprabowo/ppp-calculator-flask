@@ -1,0 +1,20 @@
+{
+  "name": "Purchasing Power Parity Converter",
+  "short_name": "PPP Converter",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "/static/images/192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

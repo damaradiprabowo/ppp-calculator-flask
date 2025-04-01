@@ -37,8 +37,8 @@ h2, h3, p {
 h4 {
     color: #888888;
     font-size: 13px;
-    margin-top: -35px; /* Adjust to fit nicely below the h1 if needed */
-    margin-bottom: 30px; /* Adjust spacing between subtitle and form */
+    margin-top: -35px;
+    margin-bottom: 30px;
     text-align: center;
     font-weight: normal;
 }
@@ -51,7 +51,6 @@ h4 {
     display: flex;
     align-items: center;
     gap: 8px;
-    position: relative;
 }
 
 .input-wrapper > div {
@@ -159,27 +158,51 @@ td {
     background: var(--g), var(--g), var(--g);
     background-size: 30px 30px;
     animation: l9 1s infinite alternate;
-  }
-  @keyframes l9 {
+}
+@keyframes l9 {
     0% {
-      background-position: 0 50%, 50% 50%, 100% 50%;
+        background-position: 0 50%, 50% 50%, 100% 50%;
     }
     20% {
-      background-position: 0 0, 50% 50%, 100% 50%;
+        background-position: 0 0, 50% 50%, 100% 50%;
     }
     40% {
-      background-position: 0 100%, 50% 0, 100% 50%;
+        background-position: 0 100%, 50% 0, 100% 50%;
     }
     60% {
-      background-position: 0 50%, 50% 100%, 100% 0;
+        background-position: 0 50%, 50% 100%, 100% 0;
     }
     80% {
-      background-position: 0 50%, 50% 50%, 100% 100%;
+        background-position: 0 50%, 50% 50%, 100% 100%;
     }
     100% {
-      background-position: 0 50%, 50% 50%, 100% 50%;
+        background-position: 0 50%, 50% 50%, 100% 50%;
     }
-  }
+}
+
+.switch-button {
+    background: #2a2a2a;
+    border: 1px solid #404040;
+    border-radius: 4px;
+    color: #808080;
+    height: 28px;
+    width: 40px; /* Fixed width for consistency */
+    padding: 0;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex: none; /* Prevents stretching */
+}
+
+.switch-button:hover {
+    background: #404040;
+    color: #ffffff;
+    border-color: #606060;
+}
 
 @media (min-width: 768px) {
     .calculator {
@@ -191,27 +214,59 @@ td {
 
     .input-wrapper {
         flex-direction: row;
+        gap: 12px;
+        align-items: flex-end; /* Aligns items at the bottom */
     }
 
-    .input-wrapper > * {
+    .input-wrapper > div {
         flex: 1;
+    }
+
+    .switch-button {
+        width: 36px; /* Slightly smaller on desktop */
+        height: 28px;
     }
 }
 
 @media (max-width: 768px) {
+    .calculator {
+        padding: 20px;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
     .input-wrapper {
         flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        gap: 8px;
     }
 
     .switch-button {
-        margin-top: 0;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
         transform: rotate(90deg);
+        margin: 8px auto; /* Centered in mobile view */
     }
 
-    .switch-button:hover {
-        transform: rotate(90deg);
+    select, input {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    button[type="submit"] {
+        padding: 15px;
+        margin-top: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    h4 {
+        font-size: 14px;
+        margin-top: -25px;
     }
 }
 
@@ -284,31 +339,4 @@ footer a:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-.switch-button {
-    position: relative;
-    background: #2a2a2a;
-    border: 1px solid #404040;
-    border-radius: 4px;
-    color: #808080;
-    width: 28px;
-    min-width: 28px;
-    height: 28px;
-    padding: 0;
-    margin: 0;
-    margin-top: 22px;
-    cursor: pointer;
-    font-size: 14px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: none;
-    transition: all 0.2s ease;
-}
-
-.switch-button:hover {
-    background: #404040;
-    color: #ffffff;
-    border-color: #606060;
 }
